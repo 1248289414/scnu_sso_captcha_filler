@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         自动填充华南师范大学sso系统验证码
-// @version      v1.2
+// @version      v1.3
 // @author       1248289414
 // @namespace    https://github.com/1248289414
 // @description  基于tensorflow.js实现自动填充华南师范大学sso系统验证码，目前模型准确率50%。
 // @match        https://sso.scnu.edu.cn/AccountService/openapi/login.html*
+// @match        https://sso.scnu.edu.cn/AccountService/user/login.html
 // @run-at       document-end
 // @require      https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.0/dist/tf.min.js
 // ==/UserScript==
