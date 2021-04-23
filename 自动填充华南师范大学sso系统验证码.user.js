@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         自动填充华南师范大学sso系统验证码
-// @version      v1.3
+// @version      v1.4
 // @author       1248289414
 // @namespace    https://github.com/1248289414
 // @description  基于tensorflow.js实现自动填充华南师范大学sso系统验证码，目前模型准确率50%。
 // @match        https://sso.scnu.edu.cn/AccountService/openapi/login.html*
-// @match        https://sso.scnu.edu.cn/AccountService/user/login.html
+// @match        https://sso.scnu.edu.cn/AccountService/user/login.html*
 // @run-at       document-end
 // @require      https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.0/dist/tf.min.js
 // ==/UserScript==
@@ -26,6 +26,8 @@ function decode(y) {
 async function run() {
     // 获取验证码图片，判断是否加载成功
     const imgEl = document.getElementById("codeimg");
+    imgEl.addEventListener("load",run);
+
     if (imgEl.height != 48 || imgEl.width != 96) {
         return
     }
@@ -58,6 +60,8 @@ async function run() {
     const ret = model.predict(img);
     const preCode = decode(ret);
 
+    console.log(preCode);
+
     // 填入验证码
     let rancodeEl = document.getElementById("rancode");
     rancodeEl.value = preCode;
@@ -66,6 +70,5 @@ async function run() {
 (async function () {
     'use strict';
 
-    const imgEl = document.getElementById("codeimg");
-    imgEl.addEventListener("load",run);
+    window.addEventListener('load', run, false);
 })();
